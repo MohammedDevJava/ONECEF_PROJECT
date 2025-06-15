@@ -11,6 +11,8 @@ services:
         value: 8069
       - key: HOST
         value: dpg-d17blgh5pdvs7386ecn0-a
+      - key: DB_PORT
+        value: 5432
       - key: POSTGRES_USER
         value: odoo_db_hu7t_user
       - key: POSTGRES_PASSWORD
