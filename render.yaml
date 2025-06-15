@@ -4,9 +4,30 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
+    port: 8069
     envVars:
       - key: PORT
-        value: 10000
+        value: 8069
+      - key: DB_HOST
+        fromDatabase:
+          name: odoo-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: odoo-db
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: odoo-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: odoo-db
+          property: password
+      - key: DB_NAME
+        value: odoo_db_hu7t
+      - key: INIT_DB
+        value: "true"
 
 databases:
   - name: odoo-db
