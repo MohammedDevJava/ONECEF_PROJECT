@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="fleet_vehicle_order_form_inherit_bsi_fleettrack">
+            <field name="name">fleet.vehicle.form.inherit.bsiedi_fleettrack</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location']" position="after">
+                    <field name="geotab_device"/>
+                    <field name="lat"/>
+                    <field name="lon"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

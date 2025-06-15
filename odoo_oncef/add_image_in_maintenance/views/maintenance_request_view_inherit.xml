@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="add_image_in_maintenance.hr_equipment_request_view_form_inherit" model="ir.ui.view">
+            <field name="name">maintenance.hr_equipment_request_view_form.inherit.add_image_in_maintenance</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='maintenance_type']" position="after">
+                    <field name="show_image" string="Ajouter une image"/>
+                    <field name="image" widget="image" filename="image_filename" style="width: 150px; height: 150px;" invisible="not show_image"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

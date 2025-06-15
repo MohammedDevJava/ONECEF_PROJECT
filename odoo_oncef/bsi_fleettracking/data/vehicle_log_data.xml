@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_vehiclelogs" model="ir.sequence">
+            <field name="name">Vehicle Logs Sequence Number</field>
+            <field name="code">bsifleettrack.vehiclelog.number</field>
+            <field name="prefix">VL</field>
+            <field name="padding">7</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+    </data>
+</odoo>
