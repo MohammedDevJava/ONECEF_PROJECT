@@ -4,32 +4,29 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
-    ports:
-      - port: 8069
     envVars:
       - key: PORT
-        value: 8069
-      - key: HOST
+        value: 10000
+      - key: DB_HOST
         fromDatabase:
           name: odoo-db
           property: host
-      - key: POSTGRES_USER
+      - key: DB_USER
         fromDatabase:
           name: odoo-db
           property: user
-      - key: POSTGRES_PASSWORD
+      - key: DB_PASSWORD
         fromDatabase:
           name: odoo-db
           property: password
-      - key: POSTGRES_DB
+      - key: DB_NAME
         fromDatabase:
           name: odoo-db
           property: database
-      - key: ADMIN_PASSWORD
-        generateValue: true
-      - key: DB_FILTER
-        value: ".*"
+      - key: DB_PORT
+        value: 5432
 
 databases:
   - name: odoo-db
+    databaseName: odoo
     plan: free
