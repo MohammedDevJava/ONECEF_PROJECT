@@ -10,26 +10,26 @@ services:
       - key: PORT
         value: 8069
       - key: HOST
-        value: dpg-d17blgh5pdvs7386ecn0-a
-      - key: DB_PORT
-        value: 5432
+        fromDatabase:
+          name: odoo-db
+          property: host
       - key: POSTGRES_USER
-        value: odoo_db_hu7t_user
+        fromDatabase:
+          name: odoo-db
+          property: user
       - key: POSTGRES_PASSWORD
-        value: 5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd
+        fromDatabase:
+          name: odoo-db
+          property: password
       - key: POSTGRES_DB
-        value: odoo_db_hu7t
+        fromDatabase:
+          name: odoo-db
+          property: database
       - key: ADMIN_PASSWORD
         generateValue: true
       - key: DB_FILTER
         value: ".*"
-      - key: HTTP_PORT
-        value: 8069
-      - key: LONGPOLLING_PORT
-        value: 8072
 
 databases:
   - name: odoo-db
-    databaseName: odoo_db_hu7t
-    user: odoo_db_hu7t_user
     plan: free
