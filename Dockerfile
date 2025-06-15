@@ -27,22 +27,22 @@ EXPOSE 8069
 # Command to run Odoo with initialization if needed
 CMD if [ "$INIT_DB" = "true" ]; then \
         odoo -i base --stop-after-init \
-        --db_host=$DB_HOST \
-        --db_port=$DB_PORT \
-        --db_user=$DB_USER \
-        --db_password=$DB_PASSWORD \
-        --database=$DB_NAME \
+        --db_host="${DB_HOST}" \
+        --db_port="${DB_PORT:-5432}" \
+        --db_user="${DB_USER}" \
+        --db_password="${DB_PASSWORD}" \
+        --database="${DB_NAME}" \
         && exec odoo \
-        --db_host=$DB_HOST \
-        --db_port=$DB_PORT \
-        --db_user=$DB_USER \
-        --db_password=$DB_PASSWORD \
-        --database=$DB_NAME; \
+        --db_host="${DB_HOST}" \
+        --db_port="${DB_PORT:-5432}" \
+        --db_user="${DB_USER}" \
+        --db_password="${DB_PASSWORD}" \
+        --database="${DB_NAME}"; \
     else \
         exec odoo \
-        --db_host=$DB_HOST \
-        --db_port=$DB_PORT \
-        --db_user=$DB_USER \
-        --db_password=$DB_PASSWORD \
-        --database=$DB_NAME; \
+        --db_host="${DB_HOST}" \
+        --db_port="${DB_PORT:-5432}" \
+        --db_user="${DB_USER}" \
+        --db_password="${DB_PASSWORD}" \
+        --database="${DB_NAME}"; \
     fi
