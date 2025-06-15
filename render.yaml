@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: odoo
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: HOST
+        value: postgres
+      - key: USER
+        value: odoo
+      - key: PASSWORD
+        fromDatabase:
+          name: postgres
+          property: password
+
+databases:
+  - name: postgres
+    databaseName: postgres
+    user: odoo
+    plan: free

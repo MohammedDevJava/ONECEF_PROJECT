@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Odoo
+*.log
+filestore/
+sessions/
+odoo-web-data/  
+
+# Docker
+odoo-data/
+postgres-data/
+
+# Environment
+.env

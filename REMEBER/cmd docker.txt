@@ -1,0 +1,2 @@
+#CREATE NEW MODULE WITH CMD 
+docker-compose exec odoo /usr/bin/odoo scaffold my_new_module /mnt/extra-addons
