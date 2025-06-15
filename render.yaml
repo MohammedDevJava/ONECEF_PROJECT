@@ -3,9 +3,7 @@ services:
     name: odoo
     env: docker
     dockerfilePath: ./Dockerfile
-    plan: free
-    ports:
-      - port: 8069
+    plan: free    port: 8069
     envVars:
       - key: DB_HOST
         fromDatabase:
