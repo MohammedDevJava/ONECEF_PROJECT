@@ -1,23 +1,18 @@
 FROM odoo:18
 
-# Fix locale issues
+# Fix locale
 USER root
 RUN apt-get update && apt-get install -y locales && \
-    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
-    locale-gen && \
+    locale-gen en_US.UTF-8 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV LANG=en_US.UTF-8
-ENV LANGUAGE=en_US:en
-ENV LC_ALL=en_US.UTF-8
 
-# Copy your custom addons
+# Copy addons
 COPY ./odoo_oncef /mnt/extra-addons
-
-# Set permissions
 RUN chown -R odoo:odoo /mnt/extra-addons
 
 USER odoo
 
-# The key fix: Use $PORT environment variable and remove invalid --database parameter
-CMD ["sh", "-c", "odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --http-port=$PORT --workers=0 --max-cron-threads=1"]
+# Direct command with your database details
+CMD ["sh", "-c", "odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --db_host=dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com --db_port=5432 --db_user=odoo_db_hu7t_user --db_password=5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd --http-port=$PORT --workers=0 --db-filter=.*"]
