@@ -21,10 +21,10 @@ services:
         generateValue: true
       - key: DB_FILTER
         value: ".*"
-      - key: DATABASE_URL
-        fromDatabase:
-          name: odoo-db
-          property: connectionString
+      - key: HTTP_PORT
+        value: 8069
+      - key: LONGPOLLING_PORT
+        value: 8072
 
 databases:
   - name: odoo-db

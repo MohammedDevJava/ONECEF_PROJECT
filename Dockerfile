@@ -12,9 +12,11 @@ RUN chown -R odoo:odoo /mnt/extra-addons/
 RUN mkdir -p /etc/odoo
 RUN echo '[options]' > /etc/odoo/odoo.conf
 RUN echo 'addons_path = /mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons' >> /etc/odoo/odoo.conf
+RUN echo 'http_port = 8069' >> /etc/odoo/odoo.conf
+RUN echo 'longpolling_port = 8072' >> /etc/odoo/odoo.conf
 
-# Expose the port
-EXPOSE 8069
+# Expose the ports
+EXPOSE 8069 8072
 
 USER odoo
 
