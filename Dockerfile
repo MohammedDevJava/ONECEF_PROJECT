@@ -33,7 +33,7 @@ USER odoo
 CMD ["odoo", \
      "--config=/etc/odoo/odoo.conf", \
      "--db_host=$DB_HOST", \
-     "--db_port=5432", \
+     "--db_port=$DB_PORT", \
      "--db_user=$DB_USER", \
      "--db_password=$DB_PASSWORD", \
      "--database=$DB_NAME"]

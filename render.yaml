@@ -1,16 +1,17 @@
 services:
-  - type: web
-    name: odoo
+  - type: web    name: odoo
     env: docker
     dockerfilePath: ./Dockerfile
-    plan: free    port: 8069
-    envVars:
-      - key: DB_HOST
+    plan: free
+    port: 8069
+    envVars:      - key: DB_HOST
         fromDatabase:
           name: odoo-db
           property: host
       - key: DB_PORT
-        value: 5432
+        fromDatabase:
+          name: odoo-db
+          property: port
       - key: DB_USER
         fromDatabase:
           name: odoo-db
@@ -20,7 +21,9 @@ services:
           name: odoo-db
           property: password
       - key: DB_NAME
-        value: postgres
+        fromDatabase:
+          name: odoo-db
+          property: database
       - key: PORT
         value: 8069
       - key: HOST
