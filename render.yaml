@@ -17,10 +17,6 @@ services:
         fromDatabase:
           name: odoo-db
           property: password
-      - key: DB_NAME
-        fromDatabase:
-          name: odoo-db
-          property: database
       - key: PORT
         value: 10000
 

@@ -16,5 +16,5 @@ COPY ./odoo_oncef /mnt/extra-addons
 
 USER odoo
 
-# Direct start without waiting
-CMD ["sh", "-c", "odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --db_host=$DB_HOST --db_port=5432 --db_user=$DB_USER --db_password=$DB_PASSWORD --db_name=$DB_NAME --http-port=$PORT --workers=0 --max-cron-threads=1 --limit-time-cpu=600 --limit-time-real=1200"]
+# Remove the invalid --db_name parameter
+CMD ["sh", "-c", "odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --db_host=$DB_HOST --db_port=5432 --db_user=$DB_USER --db_password=$DB_PASSWORD --http-port=$PORT --workers=0 --max-cron-threads=1"]
