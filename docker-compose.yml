@@ -1,32 +1,26 @@
-  services:
-    odoo:
-      image: odoo:18
-      container_name: odoo18
-      depends_on:
-        - postgres
-      ports:
-        - "8080:8069"
-      environment:
-        HOST: postgres
-        USER: odoo
-        PASSWORD: odoo
-      volumes:
-        - odoo-data:/var/lib/odoo
-        - ./odoo_oncef:/mnt/extra-addons
-      restart: unless-stopped
+services:
+  - type: web
+    name: odoo
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: HOST
+        fromDatabase:
+          name: odoo-db
+          property: host
+      - key: USER
+        fromDatabase:
+          name: odoo-db
+          property: user
+      - key: PASSWORD
+        fromDatabase:
+          name: odoo-db
+          property: password
+      - key: PORT
+        value: 10000
 
-    postgres:
-      image: postgres:15
-      container_name: postgres_odoo
-      environment:
-        POSTGRES_DB: postgres
-        POSTGRES_USER: odoo
-        POSTGRES_PASSWORD: odoo 
-        PGDATA: /var/lib/postgresql/data/pgdata
-      volumes:
-        - postgres-data:/var/lib/postgresql/data/pgdata
-      restart: unless-stopped
-
-  volumes:
-    odoo-data:
-    postgres-data:
+databases:
+  - name: odoo-db
+    databaseName: postgres
+    plan: free
