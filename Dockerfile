@@ -14,35 +14,5 @@ RUN chown -R odoo:odoo /mnt/extra-addons
 
 USER odoo
 
-# Create Odoo configuration file
-RUN mkdir -p /etc/odoo
-RUN echo '[options]' > /etc/odoo/odoo.conf && \
-    echo 'addons_path = /mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons' >> /etc/odoo/odoo.conf && \
-    echo 'http_port = 8069' >> /etc/odoo/odoo.conf && \
-    echo 'db_sslmode = prefer' >> /etc/odoo/odoo.conf
-
-# Expose the port
-EXPOSE 8069
-
-# Command to run Odoo with initialization if needed
-CMD if [ "$INIT_DB" = "true" ]; then \
-        odoo -i base --stop-after-init \
-        --db_host="${DB_HOST}" \
-        --db_port="${DB_PORT:-5432}" \
-        --db_user="${DB_USER}" \
-        --db_password="${DB_PASSWORD}" \
-        --database="${DB_NAME}" \
-        && exec odoo \
-        --db_host="${DB_HOST}" \
-        --db_port="${DB_PORT:-5432}" \
-        --db_user="${DB_USER}" \
-        --db_password="${DB_PASSWORD}" \
-        --database="${DB_NAME}"; \
-    else \
-        exec odoo \
-        --db_host="${DB_HOST}" \
-        --db_port="${DB_PORT:-5432}" \
-        --db_user="${DB_USER}" \
-        --db_password="${DB_PASSWORD}" \
-        --database="${DB_NAME}"; \
-    fi
+# Direct command with your database details
+CMD ["sh", "-c", "odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --db_host=dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com --db_port=5432 --db_user=odoo_db_hu7t_user --db_password=5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd --http-port=$PORT --workers=0 --db-filter=.*"]  
