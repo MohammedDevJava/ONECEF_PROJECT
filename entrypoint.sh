@@ -3,7 +3,8 @@ set -e
 
 # Wait for database to be ready
 echo "Waiting for database to be ready..."
-until PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d postgres -c '\q'; do
+echo "Connecting to: $DB_HOST:$DB_PORT with user: $DB_USER"
+until PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d postgres -c '\q' 2>/dev/null; do
   >&2 echo "Database is unavailable - sleeping"
   sleep 1
 done
@@ -11,7 +12,7 @@ done
 >&2 echo "Database is up - executing command"
 
 # Check if database exists and has base modules
-DB_EXISTS=$(PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'")
+DB_EXISTS=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'" 2>/dev/null || echo "0")
 
 if [ "$DB_EXISTS" != "1" ]; then
     echo "Database doesn't exist, creating and initializing..."
@@ -29,7 +30,7 @@ if [ "$DB_EXISTS" != "1" ]; then
 else
     echo "Database exists, checking if properly initialized..."
     # Check if ir_http model exists
-    MODEL_EXISTS=$(PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT COUNT(*) FROM information_schema.tables WHERE table_name='ir_model' AND table_schema='public'")
+    MODEL_EXISTS=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT COUNT(*) FROM information_schema.tables WHERE table_name='ir_model' AND table_schema='public'" 2>/dev/null || echo "0")
     
     if [ "$MODEL_EXISTS" = "0" ]; then
         echo "Database exists but not properly initialized, reinitializing..."
