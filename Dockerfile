@@ -12,7 +12,11 @@ ENV LANG=en_US.UTF-8
 COPY ./odoo_oncef /mnt/extra-addons
 RUN chown -R odoo:odoo /mnt/extra-addons
 
+# Create entrypoint script
+COPY --chown=odoo:odoo entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 USER odoo
 
-# Direct command with your database details
-CMD ["sh", "-c", "odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --db_host=dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com --db_port=5432 --db_user=odoo_db_hu7t_user --db_password=5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd --http-port=$PORT --workers=0 --db-filter=.*"]  
+# Use custom entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
