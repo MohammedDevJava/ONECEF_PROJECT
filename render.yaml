@@ -6,14 +6,14 @@ services:
     plan: free
     envVars:
       - key: PORT
-        value: 10000
+        value: "10000"
       - key: DB_HOST
-        value: dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com
+        value: "dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com"
       - key: DB_USER
-        value: odoo_db_hu7t_user
+        value: "odoo_db_hu7t_user"
       - key: DB_PASSWORD
-        value: 5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd
+        value: "5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd"
       - key: DB_NAME
-        value: odoo_db_hu7t
+        value: "odoo_db_hu7t"
       - key: DB_PORT
-        value: 5432
+        value: "5432"
