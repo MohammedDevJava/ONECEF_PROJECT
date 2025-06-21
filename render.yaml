@@ -4,16 +4,7 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
+    # Explicitly remove any database environment variables that might conflict
     envVars:
-      - key: PORT
-        value: "10000"
-      - key: DB_HOST
-        value: "dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com"
-      - key: DB_USER
-        value: "odoo_db_hu7t_user"
-      - key: DB_PASSWORD
-        value: "5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd"
-      - key: DB_NAME
-        value: "odoo_db_hu7t"
-      - key: DB_PORT
-        value: "5432"
+      - key: DATABASE_URL
+        value: ""

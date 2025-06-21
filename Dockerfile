@@ -10,16 +10,14 @@ RUN apt-get update && \
 COPY ./odoo_oncef /mnt/extra-addons
 RUN chown -R odoo:odoo /mnt/extra-addons
 
+# Create a startup script
+COPY --chown=odoo:odoo start.sh /start.sh
+RUN chmod +x /start.sh
+
 USER odoo
 
-# Direct command with hardcoded database configuration
-CMD ["odoo", \
-     "--addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons", \
-     "--db_host=dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com", \
-     "--db_port=5432", \
-     "--db_user=odoo_db_hu7t_user", \
-     "--db_password=5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd", \
-     "--http-port=10000", \
-     "--workers=0", \
-     "--without-demo=all", \
-     "--db-filter=odoo_db_hu7t"]
+# Expose the port for Render
+EXPOSE 10000
+
+# Use the startup script
+ENTRYPOINT ["/start.sh"]
