@@ -8,23 +8,12 @@ services:
       - key: PORT
         value: 10000
       - key: DB_HOST
-        fromDatabase:
-          name: odoo-db
-          property: host
+        value: dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com
       - key: DB_USER
-        fromDatabase:
-          name: odoo-db
-          property: user
+        value: odoo_db_hu7t_user
       - key: DB_PASSWORD
-        fromDatabase:
-          name: odoo-db
-          property: password
+        value: 5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd
       - key: DB_NAME
-        value: odoo_production
+        value: odoo_db_hu7t
       - key: DB_PORT
         value: 5432
-
-databases:
-  - name: odoo-db
-    databaseName: odoo_production
-    plan: free

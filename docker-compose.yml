@@ -1,26 +1,35 @@
-services:
-  - type: web
-    name: odoo
-    env: docker
-    dockerfilePath: ./Dockerfile
-    plan: free
-    envVars:
-      - key: HOST
-        fromDatabase:
-          name: odoo-db
-          property: host
-      - key: USER
-        fromDatabase:
-          name: odoo-db
-          property: user
-      - key: PASSWORD
-        fromDatabase:
-          name: odoo-db
-          property: password
-      - key: PORT
-        value: 10000
+version: '3.8'
 
-databases:
-  - name: odoo-db
-    databaseName: postgres
-    plan: free
+services:
+  odoo:
+    build: .
+    ports:
+      - "10000:10000"
+    environment:
+      - DB_HOST=dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com
+      - DB_PORT=5432
+      - DB_USER=odoo_db_hu7t_user
+      - DB_PASSWORD=5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd
+      - DB_NAME=odoo_db_hu7t
+      - PORT=10000
+    volumes:
+      - ./odoo_oncef:/mnt/extra-addons
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  # Optional: Local PostgreSQL for development
+  # Comment out if using Render database
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=odoo_local
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
