@@ -20,4 +20,4 @@ USER odoo
 EXPOSE 10000
 
 # Use the startup script
-ENTRYPOINT ["/start.sh"]
+CMD ["odoo", "--config=/etc/odoo/odoo.conf", "-i", "base"]

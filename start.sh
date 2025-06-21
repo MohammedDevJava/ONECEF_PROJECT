@@ -19,4 +19,5 @@ exec odoo \
     --workers=0 \
     --without-demo=all \
     --limit-time-cpu=600 \
-    --limit-time-real=1200
+    --limit-time-real=1200 \
+    --config=/etc/odoo/odoo.conf -i base
