@@ -43,6 +43,5 @@ exec odoo \
     --limit-memory-soft=2147483648 \
     --max-cron-threads=1 \
     --log-level=info \
-    --admin-passwd=admin123 \
     --list-db=False \
     $INIT_DB
