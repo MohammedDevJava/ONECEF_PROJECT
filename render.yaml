@@ -4,7 +4,4 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
-    # Explicitly remove any database environment variables that might conflict
-    envVars:
-      - key: DATABASE_URL
-        value: ""
+    # Remove the DATABASE_URL override since we're using direct connection
