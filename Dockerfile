@@ -10,8 +10,7 @@ RUN apt-get update && \
 COPY ./odoo_oncef /mnt/extra-addons
 RUN chown -R odoo:odoo /mnt/extra-addons
 
-# Copy configuration and startup script
-COPY --chown=odoo:odoo odoo.conf /etc/odoo/odoo.conf
+# Copy startup script
 COPY --chown=odoo:odoo start.sh /start.sh
 RUN chmod +x /start.sh
 

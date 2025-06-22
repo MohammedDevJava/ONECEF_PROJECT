@@ -39,5 +39,10 @@ exec odoo \
     --without-demo=all \
     --limit-time-cpu=600 \
     --limit-time-real=1200 \
+    --limit-memory-hard=2684354560 \
+    --limit-memory-soft=2147483648 \
+    --max-cron-threads=1 \
     --log-level=info \
+    --admin-passwd=admin123 \
+    --list-db=False \
     $INIT_DB
