@@ -26,8 +26,14 @@ fi
 
 echo "🚀 Starting Odoo server on port 10000..."
 
+# Create filestore directory structure if it doesn't exist
+echo "📁 Ensuring filestore directory exists..."
+mkdir -p /var/lib/odoo/filestore/"$DB_NAME"
+chown -R odoo:odoo /var/lib/odoo/filestore/"$DB_NAME" 2>/dev/null || true
+
 # Start Odoo
 exec odoo \
+    --config=/etc/odoo/odoo.conf \
     --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons \
     --db_host="$DB_HOST" \
     --db_port="$DB_PORT" \
@@ -43,4 +49,5 @@ exec odoo \
     --limit-memory-soft=2147483648 \
     --max-cron-threads=1 \
     --log-level=info \
+    --list-db=False \
     $INIT_DB
