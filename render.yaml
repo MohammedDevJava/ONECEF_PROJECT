@@ -4,4 +4,3 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
-    # Remove the DATABASE_URL override since we're using direct connection
