@@ -9,11 +9,11 @@ echo "🚀 Starting Odoo with fresh database..."
 echo "Port: 10000"
 
 # Create filestore directory 
-mkdir -p /var/lib/odoo/filestore/odoo_18
+mkdir -p /var/lib/odoo/filestore/odoo-db
 chown -R odoo:odoo /var/lib/odoo/filestore
 
 # Force fresh initialization by removing the marker file
-rm -f /var/lib/odoo/.odoo_18_initialized
+rm -f /var/lib/odoo/.odoo-db_initialized
 
 echo "🔧 Forcing fresh database initialization..."
 
@@ -24,13 +24,13 @@ odoo \
     --db_port=5432 \
     --db_user=odoo_db_hu7t_user \
     --db_password=5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd \
-    --database=odoo_18 \
+    --database=odoo-db \
     --init=base,web \
     --stop-after-init \
     --without-demo=all
 
 # Mark as initialized
-touch /var/lib/odoo/.odoo_18_initialized
+touch /var/lib/odoo/.odoo-db_initialized
 echo "✅ Database initialization complete"
 
 echo "▶️ Starting Odoo server..."
@@ -42,7 +42,7 @@ exec odoo \
     --db_port=5432 \
     --db_user=odoo_db_hu7t_user \
     --db_password=5ji4IDqrKXRsVaWL4OYf121C3NCjBpWd \
-    --database=odoo_18 \
+    --database=odoo-db \
     --http-port=10000 \
     --workers=0 \
     --without-demo=all \
