@@ -35,7 +35,6 @@ echo "✅ Database initialization complete"
 
 echo "▶️ Starting Odoo server..."
 
-# Start Odoo server
 exec odoo \
     --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons \
     --db_host=dpg-d17blgh5pdvs7386ecn0-a.oregon-postgres.render.com \
